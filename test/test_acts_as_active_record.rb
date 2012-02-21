@@ -1,7 +1,8 @@
 require 'minitest/autorun'
+require 'acts_as_active_record'
 
 class ExampleA
-  acts_as_active_record
+  ActsAsActiveRecord.acts_as_active_record
 end
 
 describe ExampleA do
