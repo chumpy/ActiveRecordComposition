@@ -1,6 +1,9 @@
 #acts_as_active_record
 ActiveRecord is awesome, inheritance is not.  This gem is for people who want to use ActiveRecord but don't want to be forced to use inheritance in their models.
 
+##Status
+This project will be a gem but it is not yet ready
+
 ##License
 (The MIT License)
 
