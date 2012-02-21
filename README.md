@@ -1,4 +1,4 @@
-[![Build Status](https://secure.travis-ci.org/[YOUR_GITHUB_USERNAME]/[YOUR_PROJECT_NAME].png)](http://travis-ci.org/[YOUR_GITHUB_USERNAME]/[YOUR_PROJECT_NAME])
+[![Build Status](https://secure.travis-ci.org/chumpy/acts_as_active_record.png)](http://travis-ci.org/chumpy/acts_as_active_record)
 
 #acts_as_active_record
 ActiveRecord is awesome, inheritance is not.  This gem is for people who want to use ActiveRecord but don't want to be forced to use inheritance in their models.
