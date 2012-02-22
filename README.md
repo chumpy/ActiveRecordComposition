@@ -1,6 +1,6 @@
-[![Build Status](https://secure.travis-ci.org/chumpy/acts_as_active_record.png)](http://travis-ci.org/chumpy/acts_as_active_record)
+[![Build Status](https://secure.travis-ci.org/chumpy/ActiveRecordComposition.png)](http://travis-ci.org/chumpy/ActiveRecordComposition)
 
-#acts_as_active_record
+#ActiveRecordComposition
 ActiveRecord is awesome, inheritance is not.  This gem is for people who want to use ActiveRecord but don't want to be forced to use inheritance in their models.
 
 ##Status

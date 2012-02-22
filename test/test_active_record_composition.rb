@@ -1,9 +1,9 @@
 require 'minitest/autorun'
-require 'acts_as_active_record'
+require 'active_record_composition'
 
 
 class ExampleA < class MyParent; end
-  include ActsAsActiveRecord
+  include ActiveRecordComposition
 end
 
 describe ExampleA do
