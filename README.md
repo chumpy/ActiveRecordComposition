@@ -4,7 +4,7 @@
 ActiveRecord is awesome, inheritance is not.  This gem is for people who want to use ActiveRecord but don't want to be forced to use inheritance in their models.
 
 ##Status
-This is going to be a sweet gem to avoid inheritance with ActiveRecord but it is not ready yet
+This is going to be a sweet, sweet gem to avoid inheritance with ActiveRecord but it is not ready yet
 
 ##License
 (The MIT License)
