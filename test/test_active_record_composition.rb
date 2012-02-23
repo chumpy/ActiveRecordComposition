@@ -51,9 +51,7 @@ describe ExampleB do
 
   it "can be created with an ActiveRecordComposite owner" do
     example_a = ExampleA.create(:a => 2)
-    puts "first"
     example_b = ExampleB.create(:example_a => example_a, :a => 1)
-    puts "second"
     assert_equal(ExampleB.where(:a => 1).first.example_a.id, example_a.id) 
   end
 end
