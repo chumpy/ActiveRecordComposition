@@ -1,29 +1,35 @@
 require 'active_record' 
 
-module ActiveRecordComposition
-  class String
-    def underscore
-      self.gsub(/::/, '/').
-      gsub(/([A-Z]+)([A-Z][a-z])/,'\1_\2').
-      gsub(/([a-z\d])([A-Z])/,'\1_\2').
-      tr("-", "_").
-      downcase
-    end
+class String
+  def underscore
+    self.gsub(/::/, '/').
+    gsub(/([A-Z]+)([A-Z][a-z])/,'\1_\2').
+    gsub(/([a-z\d])([A-Z])/,'\1_\2').
+    tr("-", "_").
+    downcase
   end
+end
+
+module ActiveRecordComposition
 
   module ClassMethods
-    def method_missing(meth, *args, &block)
-      ActiveRecordComposite.table_name = "#{self.name}s".underscore
-      ActiveRecordComposite.send meth, *args, &block
+    def active_composite=(active_composite)
+      @active_composite = active_composite
+    end    
+
+    def active_composite
+      @active_composite
+    end
+
+    def method_missing(method, *args, &block)
+      @active_composite.send method, *args, &block
     end
   end
 
   def self.included(base)
     base.extend(ClassMethods)
-  end
-
-  class ActiveRecordComposite < ActiveRecord::Base
-
+    base.active_composite = Object.const_set("#{base.name}ActiveComposite", Class.new(ActiveRecord::Base)do;def is_a?(compared);true;end;end)
+    base.active_composite.table_name = "#{base.name}s".underscore
   end
 
 end
