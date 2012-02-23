@@ -12,19 +12,9 @@ module ActiveRecordComposition
   end
 
   module ClassMethods
-    def create *args
+    def method_missing(meth, *args, &block)
       ActiveRecordComposite.table_name = "#{self.name}s".underscore
-      @composite_record = ActiveRecordComposite.create args
-    end
-
-    def find *args
-      ActiveRecordComposite.table_name = "#{self.name}s".underscore
-      ActiveRecordComposite.find args
-    end
-
-    def where hash
-      ActiveRecordComposite.table_name = "#{self.name}s".underscore
-      ActiveRecordComposite.where hash
+      ActiveRecordComposite.send meth, *args, &block
     end
   end
 
