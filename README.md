@@ -27,7 +27,7 @@ You can now go ahead and use your models as if they are active records like so:
 
 ```ruby
 example_a = ExampleA.create(:a => 2)
-ExampleB.create(:example_a => example_a, :a => 3
+ExampleB.create(:example_a => example_a, :a => 3)
 example_b = ExampleB.where(:example_a_id => example_a.id).first
 ```
 The above example does highlight one of the current limitations of ActiveRecordComposition, when matching on foreign ids, you have to specify the id attribute.  The goal is to not have to make concessions like these going forward. 
