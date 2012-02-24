@@ -1,10 +1,39 @@
 [![Build Status](https://secure.travis-ci.org/chumpy/ActiveRecordComposition.png)](http://travis-ci.org/chumpy/ActiveRecordComposition)
 
 #ActiveRecordComposition
-ActiveRecord is awesome, inheritance is not.  This gem is for people who want to use ActiveRecord but don't want to be forced to use inheritance in their models.
+ActiveRecord is awesome, inheritance is not always so awesome.  This gem is for people who want to use ActiveRecord but don't want to be forced to use inheritance in their models.
+
+##Use
+In your Gemfile add:
+
+```ruby
+gem 'active_record_composition'
+```
+Now you take away the inheritance of ActiveRecord::Base from your models and add include ActiveRecordComposition to the first line:
+
+```ruby
+class ExampleA < class MyParent; end
+  include ActiveRecordComposition
+  has_many :example_bs
+end
+
+class ExampleB < class MyOtherParent; end
+  include ActiveRecordComposition
+  belongs_to :example_a
+end
+```
+You can see in the example above we are inheriting from our own classes since we no longer have to manage inheritance of ActiveRecord::Base.
+You can now go ahead and use your models as if they are active records like so:
+
+```ruby
+example_a = ExampleA.create(:a => 2)
+ExampleB.create(:example_a => example_a, :a => 3
+example_b = ExampleB.where(:example_a_id => example_a.id).first
+```
+The above example does highlight one of the current limitations of ActiveRecordComposition, when matching on foreign ids, you have to specify the id attribute.  The goal is to not have to make concessions like these going forward. 
 
 ##Status
-This is going to be a sweet, sweet gem to avoid inheritance with ActiveRecord but it is not ready yet
+This gem is still early on in its maturation process.  It can handle the duties of basic ActiveRecord relationships to a point but more work/testing is required for full functionality.  Feel free to pitch in :-).
 
 ##License
 (The MIT License)
