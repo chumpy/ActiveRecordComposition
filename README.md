@@ -5,10 +5,12 @@ ActiveRecord is awesome, inheritance is not always so awesome.  This gem is for 
 
 ##Use
 In your Gemfile add:
+
 ```ruby
 gem 'active_record_composition'
 ```
 Now you take away the inheritance of ActiveRecord::Base from your models and add include ActiveRecordComposition to the first line:
+
 ```ruby
 class ExampleA < class MyParent; end
   include ActiveRecordComposition
@@ -21,6 +23,13 @@ class ExampleB < class MyOtherParent; end
 end
 ```
 You can see in the example above we are inheriting from our own classes since we no longer have to manage inheritance of ActiveRecord::Base.
+You can now go ahead and use your models as if they are active records like so:
+
+```ruby
+  example_a = ExampleA.create(:a => 2)
+  ExampleB.create(:example_a => example_a, :a => 3
+  example_b = ExampleB.where(:example_a_id => example_a.id).first
+```
 
 ##Status
 This gem is still early on in its maturation process.  It can handle the duties of basic ActiveRecord relationships but more work/testing is required.  Feel free to pitch in :-).
