@@ -49,9 +49,15 @@ describe ExampleB do
     ActiveRecord::Base.connection.execute("drop table example_bs")
   end
 
-  it "can be created with an ActiveRecordComposite owner" do
+  it "can be created with an ActiveComposite owner" do
     example_a = ExampleA.create(:a => 2)
     example_b = ExampleB.create(:example_a => example_a, :a => 1)
     assert_equal(ExampleB.where(:a => 1).first.example_a.id, example_a.id) 
+  end
+
+  it "can be queried by associated ExampleA id" do
+    example_a = ExampleA.create(:a => 2)
+    example_b = ExampleB.create(:example_a => example_a, :a => 3)
+    assert(ExampleB.where(:example_a_id => example_a.id).first)
   end
 end
