@@ -25,14 +25,6 @@ module ActiveRecordComposition
       @active_composite.send method, *args, &block
     end
 
-    def class
-      puts "caller is #{caller}"
-    end
-  end
-
-  def class
-    puts caller
-    super.class
   end
 
   def self.included(base)
