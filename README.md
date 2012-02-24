@@ -26,13 +26,14 @@ You can see in the example above we are inheriting from our own classes since we
 You can now go ahead and use your models as if they are active records like so:
 
 ```ruby
-  example_a = ExampleA.create(:a => 2)
-  ExampleB.create(:example_a => example_a, :a => 3
-  example_b = ExampleB.where(:example_a_id => example_a.id).first
+example_a = ExampleA.create(:a => 2)
+ExampleB.create(:example_a => example_a, :a => 3
+example_b = ExampleB.where(:example_a_id => example_a.id).first
 ```
+The above example does highlight one of the current limitations of ActiveRecordComposition, when matching on foreign ids, you have to specify the id attribute.  The goal is to not have to make concessions like these going forward. 
 
 ##Status
-This gem is still early on in its maturation process.  It can handle the duties of basic ActiveRecord relationships but more work/testing is required.  Feel free to pitch in :-).
+This gem is still early on in its maturation process.  It can handle the duties of basic ActiveRecord relationships to a point but more work/testing is required for full functionality.  Feel free to pitch in :-).
 
 ##License
 (The MIT License)
