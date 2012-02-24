@@ -4,3 +4,4 @@
 .git
 .rvmrc
 Gemfile.lock
+*.gem
