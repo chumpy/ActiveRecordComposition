@@ -17,7 +17,7 @@ describe ExampleA do
   before do
     ActiveRecord::Base.establish_connection(
       :adapter => 'sqlite3',
-      :database => 'db/test'
+      :database => 'test/db/test'
       )
     ActiveRecord::Base.connection.execute("create table example_as (id INTEGER PRIMARY KEY,a INTEGER,b INTEGER)")
     ActiveRecord::Base.connection.execute("create table example_bs (id INTEGER PRIMARY KEY, example_a_id INTEGER, a INTEGER)")
@@ -38,7 +38,7 @@ describe ExampleB do
   before do
     ActiveRecord::Base.establish_connection(
       :adapter => 'sqlite3',
-      :database => 'db/test'
+      :database => 'test/db/test'
       )
     ActiveRecord::Base.connection.execute("create table example_as (id INTEGER PRIMARY KEY,a INTEGER,b INTEGER)")
     ActiveRecord::Base.connection.execute("create table example_bs (id INTEGER PRIMARY KEY,example_a_id INTEGER,a INTEGER)")
