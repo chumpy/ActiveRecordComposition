@@ -40,6 +40,8 @@ example_b = ExampleB.where(:example_a_id => example_a.id).first
 The above example does highlight one of the current limitations of ActiveRecordComposition, when matching on foreign ids, you have to specify the id attribute.  This is because we are delegating method calls to an aggregation. 
 
 ##Status
+Currently supports ruby MRI 1.9.3
+
 ActiveRecordCompostion can handle the duties of basic ActiveRecord relationships.  Coming in the next version is support for single table inheritance.
 
 ##License
