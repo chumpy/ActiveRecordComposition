@@ -9,6 +9,13 @@ In your Gemfile add:
 ```ruby
 gem 'active_record_composition'
 ```
+
+Then run:
+
+```ruby
+bundle
+```
+
 Now you take away the inheritance of ActiveRecord::Base from your models and add include ActiveRecordComposition to the first line:
 
 ```ruby
@@ -30,10 +37,10 @@ example_a = ExampleA.create(:a => 2)
 ExampleB.create(:example_a => example_a, :a => 3)
 example_b = ExampleB.where(:example_a_id => example_a.id).first
 ```
-The above example does highlight one of the current limitations of ActiveRecordComposition, when matching on foreign ids, you have to specify the id attribute.  The goal is to not have to make concessions like these going forward. 
+The above example does highlight one of the current limitations of ActiveRecordComposition, when matching on foreign ids, you have to specify the id attribute.  This is because we are delegating method calls to an aggregation. 
 
 ##Status
-This gem is still early on in its maturation process.  It can handle the duties of basic ActiveRecord relationships to a point but more work/testing is required for full functionality.  Feel free to pitch in :-).
+ActiveRecordCompostion can handle the duties of basic ActiveRecord relationships.  Coming in the next version is support for single table inheritance.
 
 ##License
 (The MIT License)

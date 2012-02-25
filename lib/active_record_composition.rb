@@ -22,7 +22,13 @@ module ActiveRecordComposition
     end
 
     def method_missing(method, *args, &block)
-      @active_composite.send method, *args, &block
+      args.each do |a|
+        puts a
+        args[args.index(a)] = a.active_composite if a.respond_to? :active_composite
+      end
+      *args = args
+      puts *args
+      active_composite.send method, *args, &block
     end
 
   end

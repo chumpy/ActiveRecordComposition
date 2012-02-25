@@ -60,4 +60,5 @@ describe ExampleB do
     example_b = ExampleB.create(:example_a => example_a, :a => 3)
     assert(ExampleB.where(:example_a_id => example_a.id).first)
   end
+
 end
