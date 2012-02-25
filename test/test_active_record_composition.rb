@@ -12,20 +12,28 @@ class ExampleB < class MyOtherParent; end
   belongs_to :example_a
 end
 
+def before
+  ActiveRecord::Base.establish_connection(
+    :adapter => 'sqlite3',
+    :database => 'test/db/test'
+  )
+  ActiveRecord::Base.connection.execute("create table example_as (id INTEGER PRIMARY KEY,a INTEGER,b INTEGER)")
+  ActiveRecord::Base.connection.execute("create table example_bs (id INTEGER PRIMARY KEY, example_a_id INTEGER, a INTEGER)")
+end
+
+def after
+  ActiveRecord::Base.connection.execute("drop table example_as")
+  ActiveRecord::Base.connection.execute("drop table example_bs") 
+end
+
 describe ExampleA do
 
   before do
-    ActiveRecord::Base.establish_connection(
-      :adapter => 'sqlite3',
-      :database => 'test/db/test'
-      )
-    ActiveRecord::Base.connection.execute("create table example_as (id INTEGER PRIMARY KEY,a INTEGER,b INTEGER)")
-    ActiveRecord::Base.connection.execute("create table example_bs (id INTEGER PRIMARY KEY, example_a_id INTEGER, a INTEGER)")
+    before
   end
 
   after do
-    ActiveRecord::Base.connection.execute("drop table example_as")
-    ActiveRecord::Base.connection.execute("drop table example_bs")   
+    after
   end
 
   it "is has a crate method that creates a row in the db" do
@@ -36,17 +44,11 @@ end
 
 describe ExampleB do
   before do
-    ActiveRecord::Base.establish_connection(
-      :adapter => 'sqlite3',
-      :database => 'test/db/test'
-      )
-    ActiveRecord::Base.connection.execute("create table example_as (id INTEGER PRIMARY KEY,a INTEGER,b INTEGER)")
-    ActiveRecord::Base.connection.execute("create table example_bs (id INTEGER PRIMARY KEY,example_a_id INTEGER,a INTEGER)")
+    before
   end
 
   after do
-    ActiveRecord::Base.connection.execute("drop table example_as")
-    ActiveRecord::Base.connection.execute("drop table example_bs")
+    after
   end
 
   it "can be created with an ActiveComposite owner" do
