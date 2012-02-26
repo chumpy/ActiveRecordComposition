@@ -1,7 +1,7 @@
 [![Build Status](https://secure.travis-ci.org/chumpy/ActiveRecordComposition.png)](http://travis-ci.org/chumpy/ActiveRecordComposition)
 
 #ActiveRecordComposition
-ActiveRecord is awesome, inheritance is not always so awesome.  This gem is for people who want to use ActiveRecord but don't want to be forced to use inheritance in their models.  It dynamically creates a composition relationship with a subclass of ActiveRecord:Base and delegates Active Record interactions to the newly generated class transparently to the user.
+ActiveRecord is awesome, inheritance is not always so awesome.  This gem is for people who want to use ActiveRecord but don't want to be forced to use inheritance of ActiveRecord::Base in their models.  It dynamically creates a composition relationship with a subclass of ActiveRecord::Base and transparently delegates Active Record interactions to the newly generated class.
 
 ##Use
 In your Gemfile add:
