@@ -22,11 +22,11 @@ module ActiveRecordComposition
     end
 
     def method_missing(method, *args, &block)
-      begin
+      #begin
         active_composite.send method, *args, &block
-      rescue
-        super.method_missing method, *args, &block
-      end
+      #rescue
+        #super.method_missing method, *args, &block
+      #end
     end
 
   end
@@ -38,7 +38,17 @@ module ActiveRecordComposition
 
   def self.included(base)
     base.extend(ClassMethods)
-    base.active_composite = create_class("#{base.name}", ActiveRecord::Base)
+    base.active_composite = self.create_class("#{base.name}ActiveComposite", ActiveRecord::Base) do
+   
+      def is_a?(compared)
+        return true if self.class.name.gsub('ActiveComposite','') == compared.name
+        return true if compared.name == 'ActiveRecord::Base'
+        return true if self.class.name == compared.name
+        return false
+      end
+
+    end
+    base.active_composite.table_name = "#{base.name}s".underscore
   end
 
 end
