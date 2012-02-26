@@ -22,26 +22,23 @@ module ActiveRecordComposition
     end
 
     def method_missing(method, *args, &block)
-      args.each do |a|
-        puts a
-        args[args.index(a)] = a.active_composite if a.respond_to? :active_composite
+      begin
+        active_composite.send method, *args, &block
+      rescue
+        super.method_missing method, *args, &block
       end
-      *args = args
-      puts *args
-      active_composite.send method, *args, &block
     end
 
   end
 
+  def self.create_class(class_name, superclass, &block)
+    klass = Class.new superclass, &block
+    Object.const_set class_name, klass
+  end
+
   def self.included(base)
     base.extend(ClassMethods)
-    base.active_composite = Object.const_set("#{base.name}ActiveComposite", Class.new(ActiveRecord::Base) do 
-        def is_a?(compared)
-          return true if (self.class.name.gsub('ActiveComposite', '') == compared.name)
-          super.is_a? compared
-        end
-      end)
-    base.active_composite.table_name = "#{base.name}s".underscore
+    base.active_composite = create_class("#{base.name}", ActiveRecord::Base)
   end
 
 end

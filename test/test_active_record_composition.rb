@@ -60,7 +60,7 @@ describe ExampleB do
   it "can be queried by associated ExampleA id" do
     example_a = ExampleA.create(:a => 2)
     example_b = ExampleB.create(:example_a => example_a, :a => 3)
-    assert(ExampleB.where(:example_a_id => example_a.id).first)
+    assert(ExampleB.where(:example_a_id => example_a).first)
   end
 
 end
