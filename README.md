@@ -21,7 +21,7 @@ Now you take away the inheritance of ActiveRecord::Base from your models and add
 ```ruby
 class ExampleA < class MyParent; end
   include ActiveRecordComposition
-  has_many :example_bs
+  has_many :example_bs, :foreign_key => 'example_a_id'
 end
 
 class ExampleB < class MyOtherParent; end
@@ -37,6 +37,9 @@ example_a = ExampleA.create(:a => 2)
 ExampleB.create(:example_a => example_a, :a => 3)
 example_b = ExampleB.where(:example_a_id => example_a).first
 ```
+
+##Caveats
+* has_many declarations - because we are delegating our calls to another class, you need to specify the foreign_key for has_many associations
 
 ##Status
 Currently supports ruby MRI 1.9.3
