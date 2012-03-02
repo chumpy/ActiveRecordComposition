@@ -38,13 +38,11 @@ ExampleB.create(:example_a => example_a, :a => 3)
 example_b = ExampleB.where(:example_a_id => example_a).first
 ```
 
-##Caveats
-* has_many declarations - because we are delegating our calls to another class, you need to specify the foreign_key for has_many associations
+ActiveRecordComposition creates a class behind the scenes named "your class name"ActiveComposite.  For the class ExampleA it would be ExampleAActiveComposite.
+There are situations where you will need to reference this class (single table inheritance, many-to-many for the :through key, etc.
 
-##Status
-Currently supports ruby MRI 1.9.3
+For has_many accociations you should specify the foreign key with :foreign_key.
 
-ActiveRecordCompostion can handle the duties of basic ActiveRecord relationships.  Coming in the next version is support for single table inheritance.
 
 ##License
 (The MIT License)
